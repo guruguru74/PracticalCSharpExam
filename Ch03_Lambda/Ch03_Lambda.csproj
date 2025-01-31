@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cs31.cs" />
+    <Compile Include="cs32.cs" />
+    <Compile Include="cs33.cs" />
+    <Compile Include="CS34.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
