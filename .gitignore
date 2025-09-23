@@ -3,3 +3,7 @@ Ch03_Lambda/obj
 Ch03_Lambda/.vs
 .vs/PracticalCSharpExam/v17
 *.vsidx
+/.vs
+/Ch13_SampleEntityFramework/bin/Debug
+/Ch13_SampleEntityFramework/obj/Debug
+/packages
