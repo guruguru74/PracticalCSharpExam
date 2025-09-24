@@ -11,15 +11,16 @@ namespace Ch13_SampleEntityFramework
     {
         static void Main(string[] args)
         {
-            InsertBooks();
 
-            AddAuthor();
+            //InsertBooks();
 
-            AddBooks();
+            //AddAuthor();
+
+            //AddBooks();
 
             //UpdateBook();
 
-            DeleteBook();
+            //DeleteBook();
 
             DisplayAllBooks();
         }
@@ -65,7 +66,7 @@ namespace Ch13_SampleEntityFramework
             using (var db = new BooksDbContext())
             {
                 return db.Books
-                    .Where(book => book.Author.Name.StartsWith("제임스"))
+                    .Where(book => book.Author.Name.StartsWith("찰스 디킨스"))
                     .ToList();
             }
         }
@@ -145,7 +146,7 @@ namespace Ch13_SampleEntityFramework
         {
             using (var db = new BooksDbContext())
             {
-                var book = db.Books.Single(x => x.Id == 10);
+                var book = db.Books.Single(x => x.Id == 1);
                 if (book != null)
                 {
                     db.Books.Remove(book);
