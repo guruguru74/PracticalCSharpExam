@@ -58,7 +58,6 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Books.cs" />
     <Compile Include="Models\BooksDbContext.cs" />
-    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
