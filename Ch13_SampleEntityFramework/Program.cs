@@ -23,6 +23,8 @@ namespace Ch13_SampleEntityFramework
             //DeleteBook();
 
             DisplayAllBooks();
+
+            GetData();
         }
 
         static void InsertBooks()
@@ -59,28 +61,6 @@ namespace Ch13_SampleEntityFramework
 
                 Console.WriteLine($"{book1.Id}, {book2.Id}"); // 1, 2")
             }
-        }
-
-        static IEnumerable<Book> GetBooks()
-        {
-            using (var db = new BooksDbContext())
-            {
-                return db.Books
-                    .Where(book => book.Author.Name.StartsWith("찰스 디킨스"))
-                    .ToList();
-            }
-        }
-
-        static void DisplayAllBooks()
-        {
-            var books = GetBooks();
-            foreach (var book in books)
-            {
-                Console.WriteLine($"{book.Id}, {book.Title}, {book.PublishedYear}");
-            }
-
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
         }
 
         private static void AddAuthor()
@@ -152,6 +132,74 @@ namespace Ch13_SampleEntityFramework
                     db.Books.Remove(book);
                     db.SaveChanges();
                 }
+            }
+        }
+
+        static IEnumerable<Book> GetBooks()
+        {
+            using (var db = new BooksDbContext())
+            {
+                return db.Books
+                    .Where(book => book.Author.Name.StartsWith("찰스 디킨스"))
+                    .ToList();
+            }
+        }
+
+        static void DisplayAllBooks()
+        {
+            var books = GetBooks();
+            foreach (var book in books)
+            {
+                Console.WriteLine($"{book.Id}, {book.Title}, {book.PublishedYear}");
+            }
+
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
+        }
+
+        static void GetData()
+        {
+
+            using (var db = new BooksDbContext())
+            {
+                Console.WriteLine();
+                // 집필한 서적이 두 권 이상인 저자를 구한다.
+                var authors = db.Authors
+                    .Where(author => author.Books.Count() >= 1);
+
+                Console.WriteLine("== 집필한 서적이 두 권 이상인 저자 ==");
+                foreach (var author in authors)
+                    Console.WriteLine($"{author.Name} {author.Gender} {author.Birthday}");
+
+
+                // 서적을 출판연도, 저자 이름 순서(오름차순)로 정렬해서 구한다.
+                var books = db.Books
+                    .OrderBy(book => book.PublishedYear)
+                    .ThenBy(book => book.Author.Name);
+
+                Console.WriteLine();
+                Console.WriteLine("== 서적을 출판연도, 저자 이름 순서(오름차순)로 정렬 ==");
+                foreach (var book in books)
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}");
+
+
+                // 각 발행연도에 해당하는 서적 수를 구한다.
+                var groups = db.Books
+                    .GroupBy(book => book.PublishedYear)
+                    .Select(g => new { PublishedYear = g.Key, Count = g.Count() });
+
+                Console.WriteLine();
+                Console.WriteLine("== 각 발행연도에 해당하는 서적 수 ==");
+                foreach (var group in groups)
+                    Console.WriteLine($"{group.PublishedYear} {group.Count}");
+
+
+                // 집필한 서적이 가장 많은 저자 한 명을 구한다.
+                var authorWithMostBooks = db.Authors.Where(author => author.Books.Count() == db.Authors.Max(a => a.Books.Count())).FirstOrDefault();
+
+                Console.WriteLine();
+                Console.WriteLine($"== 집필한 서적이 가장 많은 저자 한 명 ==");
+                Console.WriteLine($"{authorWithMostBooks.Name} {authorWithMostBooks.Books.Count()}");
             }
         }
     }
