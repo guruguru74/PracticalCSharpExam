@@ -1,7 +1,9 @@
 ﻿using Ch13_SampleEntityFramework.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,19 +14,21 @@ namespace Ch13_SampleEntityFramework
         static void Main(string[] args)
         {
 
-            //InsertBooks();
+            InsertBooks();
 
-            //AddAuthor();
+            AddAuthor();
 
-            //AddBooks();
+            AddBooks();
 
-            //UpdateBook();
+            UpdateBook();
 
-            //DeleteBook();
+            DeleteBook();
 
             DisplayAllBooks();
 
             GetData();
+
+            GetBooksAll();
         }
 
         static void InsertBooks()
@@ -159,7 +163,6 @@ namespace Ch13_SampleEntityFramework
 
         static void GetData()
         {
-
             using (var db = new BooksDbContext())
             {
                 Console.WriteLine();
@@ -169,7 +172,7 @@ namespace Ch13_SampleEntityFramework
 
                 Console.WriteLine("== 집필한 서적이 두 권 이상인 저자 ==");
                 foreach (var author in authors)
-                    Console.WriteLine($"{author.Name} {author.Gender} {author.Birthday}");
+                    Console.WriteLine($"{author.Name}, {author.Gender}, {author.Birthday}");
 
 
                 // 서적을 출판연도, 저자 이름 순서(오름차순)로 정렬해서 구한다.
@@ -180,7 +183,7 @@ namespace Ch13_SampleEntityFramework
                 Console.WriteLine();
                 Console.WriteLine("== 서적을 출판연도, 저자 이름 순서(오름차순)로 정렬 ==");
                 foreach (var book in books)
-                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}");
+                    Console.WriteLine($"{book.Title}, {book.PublishedYear}, {book.Author.Name}");
 
 
                 // 각 발행연도에 해당하는 서적 수를 구한다.
@@ -191,7 +194,7 @@ namespace Ch13_SampleEntityFramework
                 Console.WriteLine();
                 Console.WriteLine("== 각 발행연도에 해당하는 서적 수 ==");
                 foreach (var group in groups)
-                    Console.WriteLine($"{group.PublishedYear} {group.Count}");
+                    Console.WriteLine($"{group.PublishedYear}, {group.Count}");
 
 
                 // 집필한 서적이 가장 많은 저자 한 명을 구한다.
@@ -199,7 +202,26 @@ namespace Ch13_SampleEntityFramework
 
                 Console.WriteLine();
                 Console.WriteLine($"== 집필한 서적이 가장 많은 저자 한 명 ==");
-                Console.WriteLine($"{authorWithMostBooks.Name} {authorWithMostBooks.Books.Count()}");
+                Console.WriteLine($"{authorWithMostBooks.Name}, {authorWithMostBooks.Books.Count()}");
+            }
+        }
+
+        static void GetBooksAll()
+        {
+            using (var db = new BooksDbContext())
+            {
+                db.Database.Log = sql => Debug.WriteLine(sql);
+
+                List<Book> lstBooks = db.Books
+                    .Where(b => b.PublishedYear > 1800)
+                    .ToList();
+
+                Console.WriteLine();
+                Console.WriteLine($"== GetBooksAll() ==");
+                foreach (var book in lstBooks)
+                {
+                    Console.WriteLine($"{book.Title}, {book.Author.Name}");
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ namespace Ch13_SampleEntityFramework.Models
         public BooksDbContext()
             : base("name=BooksDbContext1")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BooksDbContext, Configuration>());
         }
 
         // 모델에 포함할 각 엔터티 형식에 대한 DbSet을 추가합니다. Code First 모델 구성 및 사용에 대한 
