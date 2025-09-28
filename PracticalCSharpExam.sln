@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch03_Lambda", "Ch03_Lambda\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch13_SampleEntityFramework", "Ch13_SampleEntityFramework\Ch13_SampleEntityFramework.csproj", "{BEA740CF-9A6E-49AF-BA4B-D986D4D0B671}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch14", "Ch14\Ch14.csproj", "{AD9483A7-A097-41D3-8EE5-007A915BB6EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BEA740CF-9A6E-49AF-BA4B-D986D4D0B671}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEA740CF-9A6E-49AF-BA4B-D986D4D0B671}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEA740CF-9A6E-49AF-BA4B-D986D4D0B671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9483A7-A097-41D3-8EE5-007A915BB6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9483A7-A097-41D3-8EE5-007A915BB6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9483A7-A097-41D3-8EE5-007A915BB6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9483A7-A097-41D3-8EE5-007A915BB6EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
