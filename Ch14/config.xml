@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="myAppSettings" type="CSharpPhrase.MyAppSettings, SectionSampleApp"/>
+  </configSections>
+  <myAppSettings>
+    <traceOption enabled="true" filePath="c:\MyApp\Trace.log" bufferSize="10240"/>
+  </myAppSettings>
+</configuration>

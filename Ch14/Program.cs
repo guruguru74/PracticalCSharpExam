@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpPhrase.CustomSection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -28,16 +29,18 @@ namespace Ch14
             //RunVerb();
 
 
-            GetThisVersion();
+            //GetThisVersion();
 
-            GetFileVersion();
+            //GetFileVersion();
 
-            GetOSVersion();
+            //GetOSVersion();
 
 
             GetAppSettings();
 
             GetAllSettings();
+
+            GetCustomSection();
 
 
             Console.WriteLine("Press ENTER to exit");
@@ -107,6 +110,7 @@ namespace Ch14
         }
         #endregion
 
+        #region GetVersion
         private static void GetThisVersion()
         {
             var asm = Assembly.GetExecutingAssembly();
@@ -138,6 +142,7 @@ namespace Ch14
             Console.WriteLine("Product Version: {0}", verInfo.ProductVersion);
             Console.WriteLine("===========================================");
         }
+        #endregion
 
         private static void GetAppSettings()
         {
@@ -154,6 +159,27 @@ namespace Ch14
             {
                 Console.WriteLine("{0} : {1}", key, settings[key]);
             }
+        }
+
+
+        //private static void GetCustomSection()
+        //{
+        //    var cs = ConfigurationManager.GetSection("myAppSettings") as MyAppSettings;
+        //    var option = cs.TraceOption;
+
+        //    Console.WriteLine("Enabled: {0}", option.Enabled);
+        //    Console.WriteLine("FilePath: {0}", option.FilePath);
+        //    Console.WriteLine("BufferSize: {0}", option.BufferSize);
+        //}
+
+        public static void GetCustomSection()
+        {
+            var cs = ConfigurationManager.GetSection("myAppSettings") as MyAppSettings;
+            var option = cs.TraceOption;
+
+            Console.WriteLine(option.BufferSize);
+            Console.WriteLine(option.Enabled);
+            Console.WriteLine(option.FilePath);
         }
     }
 }
